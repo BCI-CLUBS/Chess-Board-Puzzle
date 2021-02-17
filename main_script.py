@@ -7,6 +7,8 @@ import piece_movement
 BOARD_SIZE = 8
 # on the chess board, letters go from left to right, numbers go bottom to top
 LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+# good or bad board
+all_filled = True
 
 # make 2d array of board
 currentBoard = [['F' for c in range(BOARD_SIZE)] for r in range(BOARD_SIZE)]
@@ -42,13 +44,23 @@ for y in range(len(currentBoard)):
             if currentBoard[y][x] == 'Q':
                 piece_movement.simulateRook(x, y, currentBoard, BOARD_SIZE)
                 piece_movement.simulateBishop(x, y, currentBoard, BOARD_SIZE)
+            if currentBoard[y][x] == 'P':
+                piece_movement.simulatePawn(x, y, currentBoard)
+            if currentBoard[y][x] == 'K':
+                piece_movement.simulateKing(x, y, currentBoard, BOARD_SIZE)
 
 print()
 # time to run thru every tile and print the board
 for y in range(len(currentBoard)):
     for x in range(len(currentBoard[y])):
         print(currentBoard[y][x], end=' ')
+        if currentBoard[y][x] == 'F':
+            all_filled = False
     print()
 
 print()
-print('peeka boo')
+
+if all_filled:
+    print('All the tiles can be moved into.')
+else:
+    print('Some tiles can not be moved into.')
