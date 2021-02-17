@@ -1,5 +1,8 @@
 import piece_movement
 
+# on scale of 1 to 10, this is a solid 7 in spaghiti code
+# ~ janik
+
 # chess board size
 BOARD_SIZE = 8
 # on the chess board, letters go from left to right, numbers go bottom to top
@@ -29,8 +32,16 @@ while True:
 for y in range(len(currentBoard)):
     for x in range(len(currentBoard[y])):
         if currentBoard[y][x] != 'F' or currentBoard[y][x] != 'T':
+            # too many ifs, i could have made a dictionary or something
             if currentBoard[y][x] == 'R':
-                piece_movement.simulateRook(x, y, currentBoard)
+                piece_movement.simulateRook(x, y, currentBoard, BOARD_SIZE)
+            if currentBoard[y][x] == 'N':
+                piece_movement.simulateKnight(x, y, currentBoard, BOARD_SIZE)
+            if currentBoard[y][x] == 'B':
+                piece_movement.simulateBishop(x, y, currentBoard, BOARD_SIZE)
+            if currentBoard[y][x] == 'Q':
+                piece_movement.simulateRook(x, y, currentBoard, BOARD_SIZE)
+                piece_movement.simulateBishop(x, y, currentBoard, BOARD_SIZE)
 
 print()
 # time to run thru every tile and print the board
